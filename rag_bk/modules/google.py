@@ -6,6 +6,8 @@ from typing import List, Optional
 import json
 import os
 
+api_key = st.secrets["SERPER_API_KEY"]
+
 class GoogleSearchInput(BaseModel):
     """Google 검색 도구의 입력 모델"""
     query: str = Field(description="검색할 쿼리")
