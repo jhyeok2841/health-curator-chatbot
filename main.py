@@ -9,7 +9,7 @@ from rag_bk.bk_messages import random_uuid
 
 # API KEY 정보로드
 load_dotenv()
-api_key = st.secrets["openai"]["OPENAI_API_KEY"]
+api_key = st.secrets["OPENAI_API_KEY"]
 
 # 프로젝트 이름
 langsmith("챗봇상담")
