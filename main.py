@@ -9,6 +9,7 @@ from rag_bk.bk_messages import random_uuid
 
 # API KEY 정보로드
 load_dotenv()
+api_key = st.secrets["openai"]["OPENAI_API_KEY"]
 
 # 프로젝트 이름
 langsmith("챗봇상담")
@@ -49,7 +50,7 @@ final_template = (
 
 # 페르소나 생성 LLM 호출 (첫 번째 체인)
 prompt1 = PromptTemplate.from_template(template=final_template)
-llm = ChatOpenAI(model_name="gpt-4o", temperature=0.5)
+llm = ChatOpenAI(api_key=api_key, model_name="gpt-4o", temperature=0.5)
 chain1 = prompt1 | llm | StrOutputParser()
 st.session_state["new_prompt"] = chain1.invoke(
     ""
