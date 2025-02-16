@@ -15,7 +15,7 @@ def show_sidebar():
 
     # 최종 페르소나 부여 프롬프트 생성
     final_template = (
-        f"{loaded_prompt.template}, "  # 사용자 상담내용 + 개인정보에 맞는 페르소나를 부여하기 위한 프롬프트
+        f"{loaded_prompt.template}, 최종적으로 너는 암에 대해서 사용자에게 상담을 진행하는 챗봇이야"  # 사용자 상담내용 + 개인정보에 맞는 페르소나를 부여하기 위한 프롬프트
     )
 
     # 페르소나 생성 LLM 호출 (첫 번째 체인)
