@@ -48,12 +48,14 @@ final_template = (
 )
 
 # 페르소나 생성 LLM 호출 (첫 번째 체인)
-prompt1 = PromptTemplate.from_template(template=final_template)
-llm = ChatOpenAI(api_key=api_key, model_name="gpt-4o", temperature=0.5)
-chain1 = prompt1 | llm | StrOutputParser()
-st.session_state["new_prompt"] = chain1.invoke(
-    ""
-)  # 생성된 페르소나 저장
+# prompt1 = PromptTemplate.from_template(template=final_template)
+# llm = ChatOpenAI(api_key=api_key, model_name="gpt-4o", temperature=0.5)
+# chain1 = prompt1 | llm | StrOutputParser()
+# st.session_state["new_prompt"] = chain1.invoke(
+#     ""
+# )
+
+st.session_state["new_prompt"] = final_template
 
 # step 2 생성된 페르소나를 이용한 최종 답변 LLM 생성
 tool1 = retriever_tool()  # pdf_search
