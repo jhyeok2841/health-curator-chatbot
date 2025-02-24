@@ -6,6 +6,7 @@ from typing import List, Optional
 import json
 import os
 
+load_dotenv()
 api_key = st.secrets["SERPER_API_KEY"]
 
 class GoogleSearchInput(BaseModel):
