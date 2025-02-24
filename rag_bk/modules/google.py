@@ -7,7 +7,6 @@ import json
 import os
 import streamlit
 
-load_dotenv()
 api_key = streamlit.secrets["SERPER_API_KEY"]
 
 class GoogleSearchInput(BaseModel):
