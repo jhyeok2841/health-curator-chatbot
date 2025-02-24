@@ -5,10 +5,10 @@ from langchain_community.utilities.google_serper import GoogleSerperAPIWrapper
 from typing import List, Optional
 import json
 import os
-import streamlit as st
+import streamlit
 
 load_dotenv()
-api_key = st.secrets["SERPER_API_KEY"]
+api_key = streamlit.secrets["SERPER_API_KEY"]
 
 class GoogleSearchInput(BaseModel):
     """Google 검색 도구의 입력 모델"""
