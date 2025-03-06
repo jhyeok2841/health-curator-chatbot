@@ -68,7 +68,7 @@ tool2 = WebSearchTool().create()  # web_search
 
 # 리액트형 에이전트 생성
 st.session_state["react_agent"] = create_agent_executor(
-    model_name="gpt-4o",
+    model_name="gpt-4o-mini",
     tools=[tool1, tool2],
 )
 # 고유 스레드 ID(랜덤으로 지어주기 -> 대화 기억용도 -> 대화내용 초기화하면 이것도 초기화)
