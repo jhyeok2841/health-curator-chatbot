@@ -15,8 +15,7 @@ langsmith("챗봇상담")
 
 st.title("The Health Curator 💬")
 
-# level = st.radio("답변 수준을 선택하세요:", ["낮은 수준", "높은 수준"])
-level = st.selectbox("답변 수준을 선택하세요:", ["낮은 수준", "높은 수준"])
+level = st.selectbox("사용자의 헬스 리터러시 수준을 선택하세요:", ["낮은 수준", "높은 수준"])
 
 # 초기화 버튼 추가
 if st.button("대화내용 초기화"):
