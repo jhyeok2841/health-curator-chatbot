@@ -14,15 +14,6 @@ api_key = st.secrets["OPENAI_API_KEY"]
 langsmith("챗봇상담")
 
 st.title("The Health Curator 💬")
-
-# level = st.selectbox("사용자의 헬스 리터러시 수준을 선택하세요:", ["낮은 수준", "높은 수준"])
-level = st.radio(
-    "사용자의 헬스 리터러시 수준을 선택하세요:",
-    ["낮은 수준", "높은 수준"],
-    horizontal=True  # 가로 배열 (기본값: 세로)
-)
-# st.write(f"선택한 수준: {level}")
-
  
 # 초기화 버튼 추가
 if st.button("대화내용 초기화"):
