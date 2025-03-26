@@ -25,11 +25,11 @@ def print_messages():
         elif message.msg_type == "tool_result":
             # tool이 web_search 이면 아래 format으로 답변
             if message.tool_name == "web_search":
-                with st.expander(f"✅ {message.tool_name}"):
+                with st.expander(f""): # ✅ {message.tool_name}
                     st.markdown(message.chat_message.content)
             # tool이 pdf_search 이면 아래 format으로 답변
             elif message.tool_name == "pdf_search":
-                with st.expander(f"✅ {message.tool_name}"):
+                with st.expander(f""): # ✅ {message.tool_name}
                     st.chat_message(message.chat_message.role).write(
                         message.chat_message.content
                     )
