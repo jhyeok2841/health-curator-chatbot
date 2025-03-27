@@ -13,7 +13,7 @@ api_key = st.secrets["OPENAI_API_KEY"]
 # 프로젝트 이름
 langsmith("챗봇상담")
 
-st.title("The Health Curator 💬11")
+st.title("The Health Curator 💬")
  
 # 초기화 버튼 추가
 if st.button("대화내용 초기화"):
