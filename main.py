@@ -97,7 +97,7 @@ if user_input:
 
             with col1:
                 st.image(
-                    "https://github.com/jhyeok2841/health-curator-chatbot/blob/main/The_Health_Curator.png",
+                    "https://raw.githubusercontent.com/jhyeok2841/health-curator-chatbot/main/The_Health_Curator.png",
                     width=50,
                 )
 
