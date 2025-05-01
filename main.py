@@ -6,7 +6,6 @@ from rag_bk.modules.handler import stream_handler
 from st_function import print_messages, add_message
 from rag_bk.bk_messages import random_uuid
 
-
 # API KEY 정보로드
 api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -68,6 +67,7 @@ st.session_state["react_agent"] = create_agent_executor(
     model_name="gpt-4o-mini",
     tools=[tool1, tool2],
 )
+
 # 고유 스레드 ID(랜덤으로 지어주기 -> 대화 기억용도 -> 대화내용 초기화하면 이것도 초기화)
 st.session_state["thread_id"] = random_uuid()
 
@@ -82,7 +82,6 @@ warning_msg = st.empty()
 
 # 만약에 사용자 입력이 들어오면...
 if user_input:
-    agent = st.session_state["react_agent"]
     # Config 설정
     agent = st.session_state["react_agent"]
     if agent is not None:
@@ -125,40 +124,3 @@ if user_input:
 
     else:
         warning_msg.warning("개인정보 입력을 완료해주세요.")
-
-
-
-    # if agent is not None:
-     
-    #     config = {"configurable": {"thread_id": st.session_state["thread_id"]}}
-    #     # 사용자의 입력
-    #     st.chat_message("user").write(user_input)
-
-    #     with st.chat_message("assistant"):
-    #         # 빈 공간(컨테이너)을 만들어서, 여기에 토큰을 스트리밍 출력한다.
-    #         container = st.empty()
-
-    #         ai_answer = ""
-    #         container_messages, tool_args, agent_answer = stream_handler(
-    #             container,
-    #             agent,
-    #             {
-    #                 "messages": [
-    #                     ("human", user_input),
-    #                 ]
-    #             },
-    #             config,
-    #         )
-
-    #         # 대화기록을 저장한다.
-    #         add_message("user", user_input)
-    #         for tool_arg in tool_args:
-    #             add_message(
-    #                 "assistant",
-    #                 tool_arg["tool_result"],
-    #                 "tool_result",
-    #                 tool_arg["tool_name"],
-    #             )
-    #         add_message("assistant", agent_answer)
-    # else:
-    #     warning_msg.warning("사이드바에서 개인정보 입력을 완료해주세요.")
