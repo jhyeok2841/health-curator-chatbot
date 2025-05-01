@@ -84,37 +84,81 @@ warning_msg = st.empty()
 if user_input:
     agent = st.session_state["react_agent"]
     # Config 설정
-
+    agent = st.session_state["react_agent"]
     if agent is not None:
         config = {"configurable": {"thread_id": st.session_state["thread_id"]}}
-        # 사용자의 입력
+
+        # 사용자 메시지 출력
         st.chat_message("user").write(user_input)
 
+        # 챗봇 응답 (스트리밍 + 이미지 함께 출력)
         with st.chat_message("assistant"):
-            # 빈 공간(컨테이너)을 만들어서, 여기에 토큰을 스트리밍 출력한다.
-            container = st.empty()
+            col1, col2 = st.columns([1, 9])
 
-            ai_answer = ""
-            container_messages, tool_args, agent_answer = stream_handler(
-                container,
-                agent,
-                {
-                    "messages": [
-                        ("human", user_input),
-                    ]
-                },
-                config,
-            )
-
-            # 대화기록을 저장한다.
-            add_message("user", user_input)
-            for tool_arg in tool_args:
-                add_message(
-                    "assistant",
-                    tool_arg["tool_result"],
-                    "tool_result",
-                    tool_arg["tool_name"],
+            with col1:
+                st.image(
+                    "https://i.namu.wiki/i/nTpvyrZYPoJBnrydRk9_5WAUX6kz1B8Wu6IvFIrLnxwoaV9BD-fP23SGhHp3wjls59AftaAIAa1xWWGCaruCog.webp",
+                    width=50,
                 )
-            add_message("assistant", agent_answer)
+
+            with col2:
+                container = st.empty()  # 여기로 스트리밍 응답이 실시간 출력됨
+
+        # 실제 응답 처리 (stream_handler가 container에 streaming 출력)
+        container_messages, tool_args, agent_answer = stream_handler(
+            container,
+            agent,
+            {"messages": [("human", user_input)]},
+            config,
+        )
+
+        # 메시지 기록 저장
+        add_message("user", user_input)
+        for tool_arg in tool_args:
+            add_message(
+                "assistant",
+                tool_arg["tool_result"],
+                "tool_result",
+                tool_arg["tool_name"],
+            )
+        add_message("assistant", agent_answer)
+
     else:
-        warning_msg.warning("사이드바에서 개인정보 입력을 완료해주세요.")
+        warning_msg.warning("개인정보 입력을 완료해주세요.")
+
+
+
+    # if agent is not None:
+     
+    #     config = {"configurable": {"thread_id": st.session_state["thread_id"]}}
+    #     # 사용자의 입력
+    #     st.chat_message("user").write(user_input)
+
+    #     with st.chat_message("assistant"):
+    #         # 빈 공간(컨테이너)을 만들어서, 여기에 토큰을 스트리밍 출력한다.
+    #         container = st.empty()
+
+    #         ai_answer = ""
+    #         container_messages, tool_args, agent_answer = stream_handler(
+    #             container,
+    #             agent,
+    #             {
+    #                 "messages": [
+    #                     ("human", user_input),
+    #                 ]
+    #             },
+    #             config,
+    #         )
+
+    #         # 대화기록을 저장한다.
+    #         add_message("user", user_input)
+    #         for tool_arg in tool_args:
+    #             add_message(
+    #                 "assistant",
+    #                 tool_arg["tool_result"],
+    #                 "tool_result",
+    #                 tool_arg["tool_name"],
+    #             )
+    #         add_message("assistant", agent_answer)
+    # else:
+    #     warning_msg.warning("사이드바에서 개인정보 입력을 완료해주세요.")
