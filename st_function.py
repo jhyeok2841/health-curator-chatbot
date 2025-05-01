@@ -13,30 +13,61 @@ class ChatMessageWithType:
 
 
 # 이전 대화를 출력
+# def print_messages():
+#     for message in st.session_state["messages"]:
+
+#         # 그냥 일반 대화라면
+#         if message.msg_type == "text":
+#             st.chat_message(message.chat_message.role).write(
+#                 message.chat_message.content
+#             )
+#         # tool을 사용한 경우
+#         elif message.msg_type == "tool_result":
+#             # tool이 web_search 이면 아래 format으로 답변
+#             if message.tool_name == "web_search":
+#                 with st.expander(f"✅ {message.tool_name}"): 
+#                     st.markdown(message.chat_message.content)
+#             # tool이 pdf_search 이면 아래 format으로 답변
+#             elif message.tool_name == "pdf_search":
+#                 with st.expander(f"✅ {message.tool_name}"):
+#                     st.chat_message(message.chat_message.role).write(
+#                         message.chat_message.content
+#                     )
+#             # else:
+#             #     st.chat_message(message.chat_message.role).write(
+#             #         message.chat_message.content
+#             #     )
+
+# 이전 대화를 출력
 def print_messages():
     for message in st.session_state["messages"]:
 
         # 그냥 일반 대화라면
+        # if message.msg_type == "text":
+        #     st.chat_message(message.chat_message.role).write(
+        #         message.chat_message.content
+        #     )
+
         if message.msg_type == "text":
-            st.chat_message(message.chat_message.role).write(
-                message.chat_message.content
-            )
+            with st.chat_message(message.chat_message.role):
+                if message.chat_message.role == "assistant":
+                    st.image(
+                        "https://i.namu.wiki/i/nTpvyrZYPoJBnrydRk9_5WAUX6kz1B8Wu6IvFIrLnxwoaV9BD-fP23SGhHp3wjls59AftaAIAa1xWWGCaruCog.webp",
+                        width=50,
+                    )
+                st.write(message.chat_message.content)
+
         # tool을 사용한 경우
         elif message.msg_type == "tool_result":
             # tool이 web_search 이면 아래 format으로 답변
             if message.tool_name == "web_search":
-                with st.expander(f"✅ {message.tool_name}"): 
+                with st.expander(f"✅ {message.tool_name}"):
                     st.markdown(message.chat_message.content)
             # tool이 pdf_search 이면 아래 format으로 답변
-            elif message.tool_name == "pdf_search":
-                with st.expander(f"✅ {message.tool_name}"):
-                    st.chat_message(message.chat_message.role).write(
-                        message.chat_message.content
-                    )
-            # else:
-            #     st.chat_message(message.chat_message.role).write(
-            #         message.chat_message.content
-            #     )
+            else:
+                st.chat_message(message.chat_message.role).write(
+                    message.chat_message.content
+                )
 
 
 # add_message도 세가지로 나눠서 답변을 저장하도록 저장
